@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指向Dao层-->        
+<mapper namespace="com.cn.dao.UserDao">
+    <!--用户信息查询-->
+    <select id="queryUser" resultType="User">
+        select * from userinfo         
+    </select>
+    
+    <select id="queryuserById" resultType="User" parameterType="int">
+        select * from UserInfo where id=#{id}
+    </select>
+    
+    <insert id="insertuser" parameterType="User">
+    	insert into userinfo (username,password,realname,sex,email,telephone,company,status,CreateTime) 
+    	values(#{username},#{password},#{realname},#{sex},#{email},#{telephone},#{company},#{status},#{CreateTime})
+    </insert>
+    
+    <update id="updateuser" parameterType="User">
+    	UPDATE userinfo 
+    	<set>    	
+    		password=#{password},
+	    	status=#{status},
+	    	UpdateTime=#{UpdateTime} 
+    	</set>    	 
+    	WHERE ID=#{id}
+    </update>
+    
+    <delete id="deleteuser">
+    	delete from userinfo
+    	where id=#{id}
+    </delete>
+
+    <select id="checklogin" parameterType="User" resultType="java.lang.Integer">
+        select count(*) from userinfo where username=#{username} and password=#{password}
+    </select>
+
+    <select id="login"  resultType="java.lang.Integer">
+        select count(*) from userinfo where username=#{param1} and password=#{param2}
+    </select>
+
+    <select id="check" resultType="java.lang.Integer">
+        select count(*) from customer
+    </select>
+</mapper>

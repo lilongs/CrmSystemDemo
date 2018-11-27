@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指向Dao层-->
+<mapper namespace="com.cn.dao.CitiesDao">
+    <select id="queryCities" resultType="Cities">
+        select CONCAT(#{temp},substring(cityid,3,2)) as id,b.city as name from demo.provinces a
+        left join  demo.cities b on a.provinceid=b.provinceid
+        where a.temp=#{temp}
+        order by a.temp,cityid
+    </select>
+</mapper>
